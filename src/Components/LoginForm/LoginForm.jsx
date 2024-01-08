@@ -2,9 +2,11 @@ import React from "react";
 import "./LoginForm.css";
 import { FaUser, FaLock } from "react-icons/fa";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useContext } from "react";
+import AuthContext from "../../context/AuthProvider";
 
 const LoginForm = () => {
+    const { setAuth } = useContext(AuthContext);
     // розібратись для чого
     const userRef = useRef();
     const errorRef = useRef();
