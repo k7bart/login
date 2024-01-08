@@ -29,10 +29,28 @@ const LoginForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(user, password);
-        setUser("");
-        setPassword("");
-        setSuccess(true);
+
+        try {
+            const response = await axios.post(
+                LOGIN_URL,
+                JSON.stringify({ user, password }),
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    withCredentials: true,
+                }
+            );
+            console.log(JSON.stringify(response?.data));
+            // console.log(JSON.stringify(response));
+            const accessToken = response?.data?.accessToken;
+            // roles from node.js course
+            const roles = response?.data?.roles;
+            setAuth({ user, password, roles, accessToken });
+            setUser("");
+            setPassword("");
+            setSuccess(true);
+        } catch (error) {}
     };
 
     return (
