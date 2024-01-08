@@ -50,7 +50,19 @@ const LoginForm = () => {
             setUser("");
             setPassword("");
             setSuccess(true);
-        } catch (error) {}
+        } catch (error) {
+            if (!error?.response) {
+                setErrorMessage("No Server Response");
+            } else if (error.response?.status === 400) {
+                setErrorMessage("Missing Username or Password");
+            } else if (error.response?.status === 401) {
+                setErrorMessage("Unauthorized");
+            } else {
+                setErrorMessage("Login Failed");
+            }
+
+            errorRef.current.focus();
+        }
     };
 
     return (
