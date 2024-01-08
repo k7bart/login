@@ -5,6 +5,9 @@ import { FaUser, FaLock } from "react-icons/fa";
 import { useRef, useEffect, useState, useContext } from "react";
 import AuthContext from "../../context/AuthProvider";
 
+import axios from "../../api/axios";
+const LOGIN_URL = "/auth";
+
 const LoginForm = () => {
     const { setAuth } = useContext(AuthContext);
     // розібратись для чого
