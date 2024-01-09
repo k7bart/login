@@ -10,7 +10,6 @@ const LOGIN_URL = "/auth";
 
 const LoginForm = () => {
     const { setAuth } = useContext(AuthContext);
-    // розібратись для чого
     const userRef = useRef();
     const errorRef = useRef();
 
