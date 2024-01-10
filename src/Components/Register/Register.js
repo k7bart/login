@@ -119,6 +119,37 @@ function Register() {
                         Allowed special characters: _!@#$%^&*()-+=
                     </p>
                 </div>
+
+                <div className="input-box">
+                    <input
+                        type="password"
+                        placeholder="Confirm password"
+                        value={matchPassword}
+                        required
+                        aria-invalid={validPassword ? "false" : "true"}
+                        aria-describedby="confirmnote"
+                        onChange={(e) => setMatchPassword(e.target.value)}
+                        onFocus={() => {
+                            setMatchFocus(true);
+                        }}
+                        onBlur={() => setMatchFocus(false)}
+                    />
+                    <FaLock className={matchPassword ? "hide" : "icon"} />
+                    <FaCheck
+                        className={
+                            validMatch && matchPassword ? "icon" : "hide"
+                        }
+                    />
+                    <FaBan
+                        className={validMatch || !password ? "hide" : "icon"}
+                    />
+                </div>
+                <div className={matchFocus ? "instructions" : "offscreen"}>
+                    <FaInfoCircle className="icon" />
+                    <p id="confirmnote">
+                        Must match the first password input field.
+                    </p>
+                </div>
             </form>
         </section>
     );
