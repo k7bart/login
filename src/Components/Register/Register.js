@@ -42,6 +42,10 @@ function Register() {
         setErrorMessage("");
     }, [user, password, matchPassword]);
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+    };
+
     return (
         <section className="wrapper">
             <p
@@ -53,7 +57,7 @@ function Register() {
                 {errorMessage}
             </p>
             <h1>Register</h1>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="input-box">
                     <input
                         type="text"
@@ -167,6 +171,13 @@ function Register() {
                     Sign Up
                 </button>
             </form>
+
+            <div className="register-link">
+                {/* put router link here */}
+                <p>
+                    Already registered? <a href="#">Sign in</a>
+                </p>
+            </div>
         </section>
     );
 }
