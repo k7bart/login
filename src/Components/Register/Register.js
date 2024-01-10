@@ -1,6 +1,6 @@
 import React from "react";
 import { useRef, useState, useEffect } from "react";
-import { FaUser, FaCheck, FaBan, FaInfoCircle } from "react-icons/fa";
+import { FaUser, FaCheck, FaBan, FaInfoCircle, FaLock } from "react-icons/fa";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PASSWORD_REGEX =
@@ -57,7 +57,6 @@ function Register() {
                 <div className="input-box">
                     <input
                         type="text"
-                        id="username"
                         ref={userRef}
                         placeholder="Username"
                         autoComplete="off"
@@ -74,9 +73,7 @@ function Register() {
                 </div>
                 <div
                     className={
-                        userFocus && user && !validName
-                            ? "instructions"
-                            : "offscreen"
+                        userFocus && !validName ? "instructions" : "offscreen"
                     }
                 >
                     <FaInfoCircle className="icon" />
@@ -84,6 +81,42 @@ function Register() {
                         4 to 24 characters <br />
                         Must begin with a letter <br />
                         Letters, numbers, underscores, hyphens allowed
+                    </p>
+                </div>
+                <div className="input-box">
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        required
+                        aria-invalid={validPassword ? "false" : "true"}
+                        aria-describedby="passwordnote"
+                        onChange={(e) => setPassword(e.target.value)}
+                        onFocus={() => {
+                            setPasswordFocus(true);
+                        }}
+                        onBlur={() => setPasswordFocus(false)}
+                    />
+                    <FaLock className={password ? "hide" : "icon"} />
+                    <FaCheck className={validPassword ? "icon" : "hide"} />
+                    <FaBan
+                        className={validPassword || !password ? "hide" : "icon"}
+                    />
+                </div>
+                <div
+                    className={
+                        passwordFocus && !validPassword
+                            ? "instructions"
+                            : "offscreen"
+                    }
+                >
+                    <FaInfoCircle className="icon" />
+                    <p id="passwordnote">
+                        12 to 24 characters <br />
+                        Must include at least one: a lowercase letter, an
+                        uppercase letter, a number, and a special character
+                        <br />
+                        Allowed special characters: _!@#$%^&*()-+=
                     </p>
                 </div>
             </form>
