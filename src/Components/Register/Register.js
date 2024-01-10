@@ -141,15 +141,31 @@ function Register() {
                         }
                     />
                     <FaBan
-                        className={validMatch || !password ? "hide" : "icon"}
+                        className={
+                            validMatch || !matchPassword ? "hide" : "icon"
+                        }
                     />
                 </div>
-                <div className={matchFocus ? "instructions" : "offscreen"}>
+                <div
+                    className={
+                        matchFocus && !validMatch ? "instructions" : "offscreen"
+                    }
+                >
                     <FaInfoCircle className="icon" />
                     <p id="confirmnote">
                         Must match the first password input field.
                     </p>
                 </div>
+
+                <button
+                    disabled={
+                        !validName || !validPassword || !validMatch
+                            ? true
+                            : false
+                    }
+                >
+                    Sign Up
+                </button>
             </form>
         </section>
     );
